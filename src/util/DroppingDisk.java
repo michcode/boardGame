@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class DroppingDisk extends JPanel implements ActionListener {
 	private int row, column,nextPlayer, attempts;
-	private JLabel banner, picLabel,messageLabel;
+	private JLabel banner, picLabel;
 	private JButton[] menuBtns,playerBtns;
 	private JLabel[][] boardImages;
 	private JPanel bannerPanel, centerPanel, buttonPanel, boardPanel, menuPanel,footerPanel;
@@ -28,10 +28,10 @@ public class DroppingDisk extends JPanel implements ActionListener {
 			greenDisk = ImageIO.read(getClass().getResource("/circleGreen.png"));
 			purpleDisk =ImageIO.read(getClass().getResource("/circlePurple.png"));
 			imageOnEast = ImageIO.read(getClass().getResource("/droppingDisk.jpg"));
-		} catch (IOException e) {
-			//e.printStackTrace();
+		} catch (IOException e) {			
+//			e.printStackTrace();
 			System.out.println("Image file not found!");
-			messageLabel.setText("Failed to load pictures, please check the resource path!");
+			JOptionPane.showMessageDialog(null,"Alert","Failed to load pictures, please check the resource path!", JOptionPane.ERROR_MESSAGE);
 		}
 		
 		bannerPanel = new JPanel();
@@ -46,12 +46,11 @@ public class DroppingDisk extends JPanel implements ActionListener {
 		boardPanel.setLayout(new GridLayout(this.row,this.column));	
 		playerBtns = new JButton[column];
 		boardImages= new JLabel[row][column];
-		messageLabel = new JLabel();
-		centerPanel.add(messageLabel, BorderLayout.SOUTH);
 		this.drawNewBoard();
 		
 		menuPanel = new JPanel();
 		menuPanel.setLayout(new GridLayout(3,1));
+		menuPanel.setBackground(Color.WHITE);
 		menuBtns = new JButton[3];
 		menuBtns[0] = new JButton("Replay");
 		menuBtns[1]= new JButton();
@@ -61,6 +60,7 @@ public class DroppingDisk extends JPanel implements ActionListener {
 		for(int i=0; i<3; i++){
 			menuPanel.add(menuBtns[i]);
 			menuBtns[i].addActionListener(this);
+			menuBtns[i].setBackground(Color.white);
 		}
 				
 		//Adding a picture on the easy side of the board game frame			
@@ -86,6 +86,7 @@ public class DroppingDisk extends JPanel implements ActionListener {
 			playerBtns[col].putClientProperty("colForDroppingDisk",col);
 			playerBtns[col].addActionListener(this);
 			buttonPanel.add(playerBtns[col]);
+			buttonPanel.setBackground(Color.WHITE);
 		}
 		centerPanel.add(buttonPanel,BorderLayout.NORTH);
 					
@@ -99,6 +100,7 @@ public class DroppingDisk extends JPanel implements ActionListener {
 			}
 		}
 		centerPanel.add(boardPanel,BorderLayout.CENTER);
+		boardPanel.setBackground(Color.WHITE);
 	}//end of drawNewBoard method
 
 	public void resetBoard(){
@@ -122,7 +124,7 @@ public class DroppingDisk extends JPanel implements ActionListener {
 				nextPlayer = 2;
 			else{
 				if(nextPlayer ==0){
-					messageLabel.setText("Please first pick a disk to start!");
+					JOptionPane.showMessageDialog(null,"Please first pick a disk to start!" );
 				}
 				else if(attempts==0){
 					gameOver= true;
@@ -145,7 +147,6 @@ public class DroppingDisk extends JPanel implements ActionListener {
 			if (clickedBtn == menuBtns[0]){
 				resetBoard();
 				nextPlayer=0;
-				messageLabel.setText("");
 				gameOver=false;
 				attempts=this.row * this.column;
 			}
@@ -161,8 +162,8 @@ public class DroppingDisk extends JPanel implements ActionListener {
 				break;
 			}
 		}
-		if (location == -1) {	
-			messageLabel.setText("Column " + columnTemp
+		if (location == -1) {				
+			JOptionPane.showMessageDialog(null, "Column " + (++columnTemp)
 					+ " is full already, please choose another column! ");
 		}
 		return location;
