@@ -1,0 +1,46 @@
+Class variable
+A class variable is a variable that any method in a class can access, including static 
+methods such as main.When declaring a class variable, you have to two basic rules to follow:
+>> You must place the declaration within the body of the class but not within any of the
+	class methods.
+>> You must include the word "static" in the declaration. The word static comes before
+	the variable type.
+
+
+Declaring and creating a Scanner object
+	static Scanner sc = new Scanner(System.in)
+	
+	To read an input value from the user, you can use one of these methods:
+		sc.nextIn()
+		sc.nextBoolean()
+		sc.nextByte()
+		sc.nextFloat()
+		sc.nextDouble()
+		sc.nextLine() >> read a String value from the user
+		sc.nextLong() >> read a long value from the user
+		sc.nextShort()
+		
+		But if read from a string, such as from a dialog box
+		you need to parse the string to the data type you are going to use
+			int x = Integer.parseIn("100")
+			short x = Short.parseShort("100")
+			long x = Long.parseLong("100")
+			byte x = Byte.parseByte("100")
+			float x = Float.parseFloat("19.95")
+	
+	To prevent the nextInt and similar methods from crashing with incorrect input data by 
+	first using one the methods to test the next input to make sure it's valid.
+		boolean hasNextBoolean() >> Returns true if the next value entered by user is a valid boolean value
+		boolean hasNextByte()
+		boolean hasNextDouble()
+		boolean hasNextFloat()
+		boolean hasNextInt()
+		boolean hasNextLong()
+		boolean hasNextShort()
+
+JFrame.Pack()
+Calling pack() sets the window's size as small as possible while 
+granting all its components their preferred sizes.
+
+Java WindowBuilder url
+http://download.eclipse.org/windowbuilder/WB/integration/4.6/
